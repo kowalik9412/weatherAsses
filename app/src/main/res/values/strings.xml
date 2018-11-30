@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">WeatherApplicationAssessment</string>
+    <string name="welcome_to">Welcome to</string>
+    <string name="head_name">WeatherApp</string>
+    <string name="check_weather">Check Weather</string>
+    <string name="manage_locations">Manage Locations</string>
+    <string name="choice">Enter location ID</string>
+    <string name="city">Aberdeen</string>
+    <string name="city_id">123456</string>
+    <string name="current_temp">15 Deg</string>
+    <string name="condition">Clouds</string>
+    <string name="cond_desc">Broken Clouds</string>
+    <string name="humidity_desc">54%</string>
+    <string name="humidity">Humidity</string>
+    <string name="min_max_temp">Temperature</string>
+    <string name="max_temp">18</string>
+    <string name="min_temp">-3</string>
+    <string name="wind">Wind</string>
+    <string name="wind_desc">18m/s</string>
+    <string name="pressure">Pressure</string>
+    <string name="pressure_desc">1016</string>
+    <string name="enter_id">Enter location ID</string>
+</resources>
