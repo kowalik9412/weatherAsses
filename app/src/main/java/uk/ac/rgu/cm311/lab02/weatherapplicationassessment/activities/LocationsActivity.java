@@ -1,4 +1,4 @@
-package uk.ac.rgu.cm311.lab02.weatherapplicationassessment.activities;
+/**package uk.ac.rgu.cm311.lab02.weatherapplicationassessment.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,4 +18,4 @@ public class LocationsActivity extends AppCompatActivity {
                 .replace(android.R.id.content, new AppPreferencesFragment())
                 .commit();
     }
-}
+}*/

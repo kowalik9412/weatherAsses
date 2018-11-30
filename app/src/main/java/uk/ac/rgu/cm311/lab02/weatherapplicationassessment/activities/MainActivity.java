@@ -53,14 +53,14 @@ public class MainActivity extends AppCompatActivity {
 
         queue = Volley.newRequestQueue(this);
 
-        checkLocationsButton = findViewById(R.id.btn_manage_locations);
+        /**checkLocationsButton = findViewById(R.id.btn_manage_locations);
         checkLocationsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), LocationsActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
         checkWeatherButton = findViewById(R.id.btn_check_weather);
         checkWeatherButton.setOnClickListener(new View.OnClickListener() {
