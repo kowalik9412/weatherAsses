@@ -18,8 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.CheckWeather">
-        </activity>
+        <activity android:name=".activities.CheckWeather"></activity>
+        <activity android:name=".activities.LocationsActivity"></activity>
     </application>
 
 </manifest>
