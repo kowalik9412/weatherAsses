@@ -3,6 +3,7 @@ package uk.ac.rgu.cm311.lab02.weatherapplicationassessment.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import uk.ac.rgu.cm311.lab02.weatherapplicationassessment.R;
@@ -18,6 +19,8 @@ public class CheckWeather extends AppCompatActivity {
     private TextView tvMinMaxTemp;
     private TextView tvWind;
     private TextView tvPressure;
+
+    private String TAG = "test";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +50,6 @@ public class CheckWeather extends AppCompatActivity {
             String maxTemp = extras.getString("MainMaxTemp");
             String wind = extras.getString("MainWind");
             String pressure = extras.getString("MainPressure");
-
 
             tvDesc.setText("Description: " + condition);
             tvMain.setText("Condition: " + main);

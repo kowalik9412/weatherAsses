@@ -1,6 +1,8 @@
 package uk.ac.rgu.cm311.lab02.weatherapplicationassessment.activities;
 
 import android.content.Intent;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -73,19 +75,27 @@ public class MainActivity extends AppCompatActivity {
                     //Run getCurrentWeather function
                     getCurrentWeather();
 
-                    //Build intent and pass data
-                    Intent intent = new Intent(MainActivity.this, CheckWeather.class);
-                    intent.putExtra("Main", currentCondition.getCondition());
-                    intent.putExtra("DescCon", currentCondition.getDescription());
-                    intent.putExtra("MainCity", currentCondition.getCity());
-                    intent.putExtra("MainLoc", currentCondition.getLocationId());
-                    intent.putExtra("MainTemp", currentCondition.getTemperature());
-                    intent.putExtra("MainHum", currentCondition.getHumidity());
-                    intent.putExtra("MainMinTemp", currentCondition.getMinTemp());
-                    intent.putExtra("MainMaxTemp", currentCondition.getMaxTemp());
-                    intent.putExtra("MainWind", currentCondition.getWindSpeed());
-                    intent.putExtra("MainPressure", currentCondition.getPressure());
-                    startActivity(intent);
+                    new CountDownTimer(4000,1000){
+                        public void onTick(long milisUntilFinished){
+                            long timeLeft =  milisUntilFinished / 1000;
+                            Toast.makeText(getApplicationContext(), "Time left: " + timeLeft, Toast.LENGTH_LONG).show();
+                        }
+                        public void onFinish(){
+                            //Build intent and pass data
+                            Intent intent = new Intent(MainActivity.this, CheckWeather.class);
+                            intent.putExtra("Main", currentCondition.getCondition());
+                            intent.putExtra("DescCon", currentCondition.getDescription());
+                            intent.putExtra("MainCity", currentCondition.getCity());
+                            intent.putExtra("MainLoc", currentCondition.getLocationId());
+                            intent.putExtra("MainTemp", currentCondition.getTemperature());
+                            intent.putExtra("MainHum", currentCondition.getHumidity());
+                            intent.putExtra("MainMinTemp", currentCondition.getMinTemp());
+                            intent.putExtra("MainMaxTemp", currentCondition.getMaxTemp());
+                            intent.putExtra("MainWind", currentCondition.getWindSpeed());
+                            intent.putExtra("MainPressure", currentCondition.getPressure());
+                            startActivity(intent);
+                        }
+                    }.start();
                 }
             }
         });
