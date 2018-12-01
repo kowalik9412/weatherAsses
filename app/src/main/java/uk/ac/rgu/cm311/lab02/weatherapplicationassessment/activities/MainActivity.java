@@ -24,6 +24,7 @@ import org.json.JSONObject;
 
 import uk.ac.rgu.cm311.lab02.weatherapplicationassessment.R;
 import uk.ac.rgu.cm311.lab02.weatherapplicationassessment.model.CurrentCondition;
+import uk.ac.rgu.cm311.lab02.weatherapplicationassessment.model.ForecastCondition;
 import uk.ac.rgu.cm311.lab02.weatherapplicationassessment.utils.Constants;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     //Declare other classes
     Constants constants;
     CurrentCondition currentCondition = new CurrentCondition();
+    ForecastCondition forecastCondition = new ForecastCondition();
 
     //Declare buttons
     private Button checkWeatherButton;
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     //Declare strings
     private String loc = "";
     private String fullURL;
+    private String fullForecastURL;
 
     private RequestQueue queue;
 
@@ -77,12 +80,17 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 else {
-                    //Build full API url & include string from String loc
+                    //Build full API url & include string from String loc & fetch current conditions
                     getURL(constants.URL_LEFT, loc, constants.URL_RIGHT);
                     Log.d("loc", fullURL);
 
+                    //Build full API url & include string from String loc & fetch forecast conditions
+                    getForecasturl(constants.URL_LEFT_FORECAST, loc, constants.URL_RIGHT_FORECAST);
+                    Log.d("loc", fullForecastURL);
+
                     //Run getCurrentWeather function
                     getCurrentWeather();
+                    getForecastWeather();
 
                     new CountDownTimer(4000,1000){
                         public void onTick(long milisUntilFinished){
@@ -115,6 +123,12 @@ public class MainActivity extends AppCompatActivity {
     private String getURL(String url1, String locID, String url2) {
         fullURL = url1 + locID + url2;
         return fullURL;
+    }
+
+    //Build FULL URL for forecast weather
+    private String getForecasturl(String url1, String locID, String url2){
+        fullForecastURL = url1 + locID + url2;
+        return fullForecastURL;
     }
 
     //Get current weather conditions
@@ -159,4 +173,45 @@ public class MainActivity extends AppCompatActivity {
         });
         queue.add(jsonObjectRequest);
     }
+
+    //Get forecast weather conditions
+    private void getForecastWeather(){
+        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
+                fullForecastURL, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray list = response.getJSONArray("list");
+
+                    for (int i = 0; i < list.length(); i++){
+                        //get mains as objects
+                        JSONObject main = list.getJSONObject(i).getJSONObject("main");
+
+                        switch (i){
+                            case 0: Log.d("loc", main.getString("temp"));
+                            forecastCondition.setVal1_temp(main.getString("temp").toString());
+                            Log.d("loc", forecastCondition.getVal1_temp());
+                            break;
+                            case 1: Log.d("loc", main.getString("temp"));
+                                forecastCondition.setVal2_temp(main.getString("temp").toString());
+                                Log.d("loc", forecastCondition.getVal2_temp());
+                            break;
+                            case 2: Log.d("loc", main.getString("temp"));
+                            break;
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        queue.add(jsonObjectRequest);
+    }
+
 }
